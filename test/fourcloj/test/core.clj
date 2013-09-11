@@ -19,3 +19,21 @@
   (is (= :vector (black-box [1 2 3 4 5 6])))
   (is (= :set (black-box #{10 (rand-int 5)})))
   (is (= [:map :set :vector :list] (map black-box [{} #{} [] ()]))))
+
+(deftest anilkey-test
+  (is (true? (anilkey :a {:a nil :b 2})))
+  (is (false? (anilkey :b {:a nil :b 2})))
+  (is (false? (anilkey :c {:a nil :b 2}))))
+
+(deftest map-defaults-test
+  (is (= (map-defaults 0 [:a :b :c]) {:a 0 :b 0 :c 0}))
+  (is (= (map-defaults "x" [1 2 3]) {1 "x" 2 "x" 3 "x"}))
+  (is (= (map-defaults [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})))
+
+(deftest reduce-odd-test
+  (is (= (reduce-odd #{1 2 3 4 5}) '(1 3 5)))
+  (is (= (reduce-odd [4 2 1 6]) '(1)))
+  (is (= (reduce-odd [2 2 4 6]) '()))
+  (is (= (reduce-odd [1 1 1 3]) '(1 1 1 3)))
+)
+

@@ -89,3 +89,25 @@
 ;; (#{1 2 3} 1) ==> 1
 ;; ([1 2 3] 0) ==> 1
 
+;;=====================================
+;; http://www.4clojure.com/problem/134
+;;=====================================
+(defn anilkey [k m]
+  (and (contains? m k) (nil? (k m)))
+)
+
+;;=====================================
+;; http://www.4clojure.com/problem/156
+;;=====================================
+(defn map-defaults [d keys]
+  (reduce (fn [m k] (assoc m k d)) {} keys))
+
+;;=====================================
+;; http://www.4clojure.com/problem/25
+;;=====================================
+;; ** need to improve this one **
+(defn reduce-odd [list]
+  (reduce #(if (= 1 (rem %2 2)) (cons %2 %1) %1) '() (reverse list)))
+  ;;(reduce (fn [a b] (if )))
+
+
