@@ -13,4 +13,9 @@
   (is (= (interleave-two-seqs [1 2 3 4] [5]) [1 5]))
   (is (= (interleave-two-seqs [30 20] [25 15]) [30 25 20 15])))
 
-
+(deftest black-box-test
+  (is (= :map (black-box {:a 1, :b 2})))
+  (is (= :list (black-box (range (rand-int 20)))))
+  (is (= :vector (black-box [1 2 3 4 5 6])))
+  (is (= :set (black-box #{10 (rand-int 5)})))
+  (is (= [:map :set :vector :list] (map black-box [{} #{} [] ()]))))
